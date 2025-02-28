@@ -1,12 +1,16 @@
-const express = require("express")
+const express = require("express");
+const path = require("path");
+const app = express();
+const PORT = process.env.PORT || 7777;
 
-const app = express()
+// Serve static files from "public" folder
+app.use(express.static(path.join(__dirname, "Portfolioserver")));
 
+// Default route to serve the homepage
 app.get("/", (req, res) => {
-    res.send("I am an endpoint");
+    res.sendFile(path.join(__dirname, "Portfolioserver", "index.html")); // Corrected path
 });
 
-
-app.listen (7777, () => {
-    console.log("listening on port 7777");
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
